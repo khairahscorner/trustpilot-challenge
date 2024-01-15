@@ -7,7 +7,7 @@ Demo available at: ***deployed URL***
 
 ## Table of contents
 
-- [Setup](##setup)
+- [Setup](#setup)
 - [Repo Structure](#repo-structure)
 - [Technologies/Resources](#technologies)
 - [Integrations](#integrations)
@@ -27,7 +27,8 @@ $ npm install
 $ npm run dev
 ```
 
-## Repo Structure (To edit)
+## Repo Structure
+**To edit
 
 ```
 /
@@ -58,7 +59,7 @@ $ npm run dev
 
 ---
 
-## Technologies/Resources
+## Technologies
 
 - <a href="https://reactjs.org/" target="_blank">React</a>
 
