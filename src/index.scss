@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Manrope', Arial, sans-serif;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  background-color: #F7F8FA;
+  color: #040F29;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+p,
+button {
+  font-weight: 400;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+.text-medium {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+input,
+textarea,
+select {
+  font-family: 'Manrope', sans-serif;
+}
+
+
+.btn-primary {
+  background: #ffc001;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.25em;
+  text-align: center;
+  color: #ffffff;
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.btn-secondary {
+  background: #d6e7ff;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
+
+  line-height: 1.25em;
+  text-align: center;
+  color: #040F29;
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.select {
+  background: #f6f7f9;
+  border: 1px solid #edeff2;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.select-dropdown {
+  margin-top: 10px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(134, 134, 134, 0.2);
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 9px 6px 6px;
+}
+
+.ReactModal__Overlay, .ReactModal__Overlay--after-open {
+z-index: 100 !important;
+}
+
+.modal-header {
+  padding: 20px; /* Add padding to the top header to create space */
+  margin-top: -20px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1; /* Ensure the header stays above the content during scrolling */
+}
+
+.modal-footer {
+  padding: 20px; /* Add padding to the top header to create space */
+  margin-bottom: 0;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 1; /* Ensure the header stays above the content during scrolling */
+}
+
+.modal-content {
+  overflow-y: auto;
+}
+
+.fill-svg {
+  svg {
+    path {
+    fill: #ffcb00;
+  }
+}
+}
+.box-shadow {
+  box-shadow: 0 8px 12px rgba(0,0,0,.04), 0 2px 4px rgba(0,0,0,.08);
+}
+.select__control {
+  background-color: #f6f7f9 !important
+}
