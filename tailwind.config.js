@@ -17,6 +17,10 @@ export default {
           DEFAULT: "#FE0000",
         },
         domokun: "#3D2B1F",
+        primary: {
+          DEFAULT: "#ecc52c",
+          bg: "#eecc4a"
+        },
       }
     },
   },
