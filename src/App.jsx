@@ -10,6 +10,7 @@ import {
   difficultyOptions,
   ponyNames,
 } from "./config/index";
+import Modal from "./components/modal";
 
 function App() {
   const [gameOptions, setGameOptions] = useState(false);
@@ -19,6 +20,7 @@ function App() {
     height: 0,
   });
   const [activeGame, setActiveGame] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
   const [gameData, setGameData] = useState(null);
 
   const [selectedPonyName, setSelectedPonyName] = useState(ponyNames[0]);
@@ -29,6 +31,7 @@ function App() {
     domokun: 0,
     endPoint: 0,
   });
+  const [gameOverResponse, setGameOverResponse] = useState("");
 
   const {
     handleSubmit,
@@ -98,6 +101,40 @@ function App() {
     }
   };
 
+  const makeNextMove = (direction) => {
+    if (!activeGame) return null;
+
+    try {
+      axiosInstance
+        .post(`/${gameData?.maze_id}`, { direction })
+        .then((res) => {
+          handleResponse(res.data);
+        })
+        .catch((err) => {
+          setError(err?.response?.data);
+        });
+    } catch (err) {
+      setError(err?.response?.data);
+    }
+  };
+
+  const handleResponse = (response) => {
+    if (response.state === "active") {
+      getMazeData(gameData?.maze_id);
+    }
+    // pony won/lost
+    else {
+      setGameOverResponse(response["state-result"]);
+      setIsGameOver(true);
+    }
+  };
+
+  const startNewGame = () => {
+    setActiveGame(false);
+    setIsGameOver(false);
+    resetGameOptions();
+  };
+
   return (
     <>
       <div className="container mx-auto">
@@ -117,40 +154,38 @@ function App() {
               <div className="grid grid-cols-3 gap-5">
                 <div className="text-left mb-8">
                   <div className="mb-4">
-                    <h4 className="mb-3 font-bold text-lg">Button Navigation</h4>
+                    <h4 className="mb-3 font-bold text-lg">
+                      Button Navigation
+                    </h4>
                     <div className="grid grid-cols-2 gap-4">
                       <Button
-                        click={handleSubmit(resetGameOptions)}
+                        click={() => makeNextMove("west")}
                         type="secondary"
                         extraClasses="mb-4"
                         size="small"
-                      >
-                        <span className="text-base">Left</span>
-                      </Button>
+                        text="Left"
+                      />
                       <Button
-                        click={handleSubmit(resetGameOptions)}
+                        click={() => makeNextMove("east")}
                         type="secondary"
                         extraClasses="mb-4"
                         size="small"
-                      >
-                        <span className="text-base">Right</span>
-                      </Button>
+                        text="Right"
+                      />
                       <Button
-                        click={handleSubmit(resetGameOptions)}
+                        click={() => makeNextMove("north")}
                         type="secondary"
                         extraClasses="mb-4"
                         size="small"
-                      >
-                        <span className="text-base">Up</span>
-                      </Button>
+                        text="Up"
+                      />
                       <Button
-                        click={handleSubmit(resetGameOptions)}
+                        click={() => makeNextMove("south")}
                         type="secondary"
                         extraClasses="mb-4"
                         size="small"
-                      >
-                        <span className="text-base">Down</span>
-                      </Button>
+                        text="Down"
+                      />
                     </div>
                     <h5 className="mb-3 font-semibold">Or </h5>
                     <Button
@@ -158,11 +193,8 @@ function App() {
                       type="secprimaryondary"
                       extraClasses="mb-4"
                       size="small"
-                    >
-                      <span className="text-base">
-                        Enable Keyboard Navigation
-                      </span>
-                    </Button>
+                      text="Enable Keyboard Navigation"
+                    />
                   </div>
                   <div className="mb-4">
                     <h4 className="mb-3 font-bold text-lg">Game Details</h4>
@@ -201,7 +233,7 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <div className="px-5 col-span-2">
+                <div className="px-5 col-span-2 mx-auto">
                   <div
                     className="maze"
                     style={{
@@ -212,18 +244,28 @@ function App() {
                   >
                     {gameData?.data.map((cell, i) => (
                       <div
-                        className={`w-[${cellSize}px] ${cell.join(" ")} ${
-                          i === locationArr.endPoint - 1
+                        className={`maze-cell w-[${cellSize}px] ${cell.join(
+                          " "
+                        )} ${
+                          i === locationArr.endPoint
                             ? "bg-success"
-                            : i === locationArr.pony - 1
+                            : i === locationArr.pony
                             ? " bg-pink-700"
-                            : i === locationArr.domokun - 1
+                            : i === locationArr.domokun
                             ? " bg-domokun"
                             : ""
                         }`}
                         key={`maze-cell-${i}`}
                       ></div>
                     ))}
+                  </div>
+                  <div className="mx-auto mt-5">
+                    <Button
+                      click={() => startNewGame()}
+                      extraClasses="w-auto mb-4 bg-red-800 hover:bg-red-600"
+                      size="small"
+                      text="End Game"
+                    />
                   </div>
                 </div>
               </div>
@@ -247,9 +289,8 @@ function App() {
                   click={() => setGameOptions(true)}
                   type="primary"
                   extraClasses="mb-4"
-                >
-                  <span className="text-base">Start</span>
-                </Button>
+                  text="Start"
+                />
               ) : (
                 <>
                   <form onSubmit={handleSubmit(onSubmit)}>
@@ -341,16 +382,14 @@ function App() {
                         type="primary"
                         extraClasses="mb-4 mr-4"
                         disabled={errors.width || errors.height}
-                      >
-                        <span className="text-base">Start Game</span>
-                      </Button>
+                        text="Start Game"
+                      />
                       <Button
                         click={handleSubmit(resetGameOptions)}
                         type="secondary"
                         extraClasses="mb-4"
-                      >
-                        <span className="text-base">Cancel</span>
-                      </Button>
+                        text="Cancel"
+                      />
                     </div>
                   </form>
                 </>
@@ -359,6 +398,12 @@ function App() {
           </div>
         )}
       </div>
+
+      <Modal
+        isOpen={isGameOver}
+        action={() => startNewGame()}
+        message={gameOverResponse}
+      />
     </>
   );
 }

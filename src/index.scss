@@ -110,6 +110,10 @@ select {
   display: grid;
 }
 
+.maze-cell{
+  border: solid 0.5px rgba(13, 101, 132, 0.16);
+}
+
 .north{
   border-top: solid 2px black;
 }

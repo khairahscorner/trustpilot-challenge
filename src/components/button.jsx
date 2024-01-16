@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 const Button = ({
   type,
-  children,
+  text,
   click,
   disabled,
   id,
@@ -29,14 +29,22 @@ const Button = ({
             ? `bg-primary text-white hover:bg-primary-bg`
             : type === "secondary"
             ? `bg-neutral-200 text-type-100 hover:bg-neutral-100`
-            : type === "delete"
-            ? `bg-status-danger text-white hover:bg-status-danger-100`
             : "bg-primary text-white hover:bg-primary-bg"
         }`}
     >
-      {children}
+      {text}
     </button>
   );
+};
+
+Button.propTypes = {
+  type: PropTypes.oneOf(['primary', 'secondary']),
+  text: PropTypes.string.isRequired,
+  click: PropTypes.func,
+  disabled: PropTypes.bool,
+  id: PropTypes.string,
+  extraClasses: PropTypes.string,
+  size: PropTypes.oneOf(['big', 'small']),
 };
 
 export default Button;
