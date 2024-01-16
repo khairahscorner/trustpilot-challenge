@@ -233,7 +233,7 @@ function App() {
                       </p>
                     </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-4 hidden md:block">
                     <h4 className="mb-3 font-bold text-lg">Game Guide</h4>
                     <div className="flex items-center mb-2">
                       <div className="w-5 h-5 bg-domokun mr-3"></div>
@@ -250,6 +250,21 @@ function App() {
                   </div>
                 </div>
                 <div className="px-0 md:px-5 col-span-3 md:col-span-2 mx-auto">
+                  <div className="mb-4 block md:hidden">
+                    <h4 className="mb-3 font-bold text-lg">Game Guide</h4>
+                    <div className="flex items-center mb-2">
+                      <div className="w-5 h-5 bg-domokun mr-3"></div>
+                      <p>Domokun position</p>
+                    </div>
+                    <div className="flex items-center mb-2">
+                      <div className="w-5 h-5 bg-pink-700 mr-3"></div>
+                      <p>Pony position</p>
+                    </div>
+                    <div className="flex items-center mb-2">
+                      <div className="w-5 h-5 bg-success mr-3"></div>
+                      <p>Escape point</p>
+                    </div>
+                  </div>
                   <div
                     className="maze"
                     style={{
