@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axiosInstance from "./config/axios";
 import Button from "./components/button";
 import Logo from "./assets/logo.jpeg";
 import { Controller, useForm } from "react-hook-form";
 import { Textinput } from "./components/input/textinput";
 import { Select } from "./components/input/select";
-import {
-  cellSize,
-  difficultyOptions,
-  ponyNames,
-} from "./config/index";
+import { difficultyOptions, ponyNames } from "./config/index";
 import Modal from "./components/modal";
 
 function App() {
@@ -19,6 +15,8 @@ function App() {
     width: 0,
     height: 0,
   });
+  const [cellSize, setCellSize] = useState(24);
+
   const [activeGame, setActiveGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [gameData, setGameData] = useState(null);
@@ -42,6 +40,24 @@ function App() {
     criteriaMode: "all",
     mode: "onSubmit",
   });
+
+  // adjust maze cell size based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 992) {
+        setCellSize(15);
+      } else {
+        setCellSize(20);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [mazeDimensions.width]);
 
   const onSubmit = (data) => {
     let mazeOptions = {
@@ -137,23 +153,23 @@ function App() {
 
   return (
     <>
-      <div className="container mx-auto">
+      <div className="mx-auto">
         {activeGame ? (
-          <div className="my-24 flex justify-center items-center">
-            <div className="bg-white w-max border rounded p-6 text-center">
-              <div className="h-24 flex justify-center items-center mb-6">
-                <img src={Logo} alt="Pony Logo" />
+          <div className="py-8 md:my-24 md:py-0 flex justify-center items-center">
+            <div className="bg-white w-full md:w-max border rounded p-6 text-center">
+              <div className="h-12 md:h-24 flex justify-center items-center mb-6">
+                <img src={Logo} className="w-24 md:w-auto" alt="Pony Logo" />
               </div>
-              <h1 className="flex justify-center items-center text-3xl mb-8">
+              <h1 className="flex justify-center items-center text-lg md:text-3xl mb-8">
                 Save The Pony Challenge
               </h1>
-              <p className="text-center text-lg mb-4 font-medium">
+              <p className="text-center text-sm md:text-lg mb-4 font-medium">
                 Help the pony escape the Domokun!
               </p>
               <div className="border-b border-neutral-200 my-8"></div>
-              <div className="grid grid-cols-3 gap-5">
-                <div className="text-left mb-8">
-                  <div className="mb-4">
+              <div className="flex flex-col-reverse md:grid md:grid-cols-3 md:gap-5">
+                <div className="text-left col-span-3 md:col-span-1 mb-8">
+                  <div className="mt-8 md:mt-0 mb-4">
                     <h4 className="mb-3 font-bold text-lg">
                       Button Navigation
                     </h4>
@@ -187,14 +203,14 @@ function App() {
                         text="Down"
                       />
                     </div>
-                    <h5 className="mb-3 font-semibold">Or </h5>
+                    {/* <h5 className="mb-3 font-semibold">Or </h5>
                     <Button
                       click={handleSubmit(resetGameOptions)}
                       type="secprimaryondary"
                       extraClasses="mb-4"
                       size="small"
                       text="Enable Keyboard Navigation"
-                    />
+                    /> */}
                   </div>
                   <div className="mb-4">
                     <h4 className="mb-3 font-bold text-lg">Game Details</h4>
@@ -233,7 +249,7 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <div className="px-5 col-span-2 mx-auto">
+                <div className="px-0 md:px-5 col-span-3 md:col-span-2 mx-auto">
                   <div
                     className="maze"
                     style={{
@@ -272,15 +288,15 @@ function App() {
             </div>
           </div>
         ) : (
-          <div className=" flex justify-center items-center h-screen">
-            <div className="bg-white w-2/5 border rounded p-6 text-center">
-              <div className="h-24 flex justify-center items-center mb-6">
-                <img src={Logo} alt="Pony Logo" />
+          <div className="flex justify-center items-center h-screen">
+            <div className="bg-white w-full md:w-2/3 lg:w-1/2 border rounded p-6 text-center">
+              <div className="h-12 md:h-24 flex justify-center items-center mb-6">
+                <img src={Logo} className="w-24 md:w-auto" alt="Pony Logo" />
               </div>
-              <h1 className="flex justify-center items-center text-3xl mb-8">
+              <h1 className="flex justify-center items-center text-lg md:text-3xl mb-4 md:mb-8">
                 Save The Pony Challenge
               </h1>
-              <p className="text-center text-lg mb-4 font-medium">
+              <p className="text-center text-sm md:text-lg mb-4 font-medium">
                 Help the pony escape the Domokun!
               </p>
               <div className="border-b border-neutral-200 my-8"></div>
@@ -294,7 +310,7 @@ function App() {
               ) : (
                 <>
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mb-4 grid grid-cols-2 gap-4">
+                    <div className="mb-4 grid grid-cols-2 gap-4 text-left">
                       <Controller
                         name="width"
                         defaultValue={15}
@@ -356,7 +372,7 @@ function App() {
                         )}
                       />
                     </div>
-                    <div className="mb-4 grid grid-cols-2 gap-4">
+                    <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                       <Select
                         label="Choose Difficulty (Optional):"
                         selected={difficulty}
