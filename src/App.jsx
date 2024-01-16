@@ -3,8 +3,8 @@ import axiosInstance from "./config/axios";
 import Button from "./components/button";
 import Logo from "./assets/logo.jpeg";
 import { Controller, useForm } from "react-hook-form";
-import { Textinput } from "./components/input/textinput";
-import { Select } from "./components/input/select";
+import { Textinput } from "./components/textinput";
+import { Select } from "./components/select";
 import { difficultyOptions, ponyNames } from "./config/index";
 import Modal from "./components/modal";
 
@@ -397,7 +397,7 @@ function App() {
                         click={handleSubmit(onSubmit)}
                         type="primary"
                         extraClasses="mb-4 mr-4"
-                        disabled={errors.width || errors.height}
+                        disabled={Object.keys(errors).length > 0}
                         text="Start Game"
                       />
                       <Button

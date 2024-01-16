@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const Textinput = ({
   autocomplete,
@@ -40,7 +40,9 @@ export const Textinput = ({
         {...rest}
       />
       {iserror ? (
-        <small className="text-[10px] text-left text-danger mt-1 col-span-5">{message}</small>
+        <small className="text-[10px] text-left text-danger mt-1 col-span-5">
+          {message}
+        </small>
       ) : null}
     </div>
   );
@@ -51,7 +53,10 @@ Textinput.propTypes = {
   label: PropTypes.string.isRequired,
   inputid: PropTypes.string.isRequired,
   message: PropTypes.string,
-  iserror: PropTypes.bool,
+  iserror: PropTypes.shape({
+    type: PropTypes.string,
+    message: PropTypes.string,
+  }),
   disabled: PropTypes.bool,
   rowType: PropTypes.bool,
   labelClasses: PropTypes.string,

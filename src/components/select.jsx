@@ -29,8 +29,8 @@ export const Select = ({
 
 Select.propTypes = {
   label: PropTypes.string.isRequired,
-  selected: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  options: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   onChange: PropTypes.func.isRequired,
   error: PropTypes.bool,
   message: PropTypes.string,
