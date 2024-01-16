@@ -21,6 +21,18 @@ export default {
           DEFAULT: "#ecc52c",
           bg: "#eecc4a"
         },
+        type: {
+          DEFAULT: "#1E2329",
+          100: "#4F5D6D",
+          200: "#ABAFAF",
+          300: "#A1ACAF",
+        },
+        neutral: {
+          DEFAULT: "#899598",
+          100: "#E1E7EC",
+          200: "#EDEFF2",
+          300: "#F6F7F9",
+        },
       }
     },
   },

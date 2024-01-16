@@ -103,52 +103,16 @@ select {
   box-sizing: border-box;
   padding: 10px;
 }
-.select-dropdown {
-  margin-top: 10px;
-  background: #fff;
-  box-shadow: 0 6px 20px rgba(134, 134, 134, 0.2);
-  border-radius: 8px;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 9px 6px 6px;
+
+.maze{
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  display: grid;
 }
 
-.ReactModal__Overlay, .ReactModal__Overlay--after-open {
-z-index: 100 !important;
+.north{
+  border-top: solid 2px black;
 }
-
-.modal-header {
-  padding: 20px; /* Add padding to the top header to create space */
-  margin-top: -20px;
-  position: sticky;
-  top: 0;
-  background-color: white;
-  z-index: 1; /* Ensure the header stays above the content during scrolling */
-}
-
-.modal-footer {
-  padding: 20px; /* Add padding to the top header to create space */
-  margin-bottom: 0;
-  position: sticky;
-  bottom: 0;
-  background-color: white;
-  z-index: 1; /* Ensure the header stays above the content during scrolling */
-}
-
-.modal-content {
-  overflow-y: auto;
-}
-
-.fill-svg {
-  svg {
-    path {
-    fill: #ffcb00;
-  }
-}
-}
-.box-shadow {
-  box-shadow: 0 8px 12px rgba(0,0,0,.04), 0 2px 4px rgba(0,0,0,.08);
-}
-.select__control {
-  background-color: #f6f7f9 !important
+.west{
+  border-left: solid 2px black;
 }
