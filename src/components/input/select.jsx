@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 export const Select = ({
   label,
@@ -25,4 +25,13 @@ export const Select = ({
       {error && <p className="text-xs text-red-500">{message}</p>}
     </div>
   );
+};
+
+Select.propTypes = {
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.bool,
+  message: PropTypes.string,
 };

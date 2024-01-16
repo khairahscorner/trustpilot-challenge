@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 
 export const Textinput = ({
   autocomplete,
@@ -44,4 +44,16 @@ export const Textinput = ({
       ) : null}
     </div>
   );
+};
+
+Textinput.propTypes = {
+  autocomplete: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  inputid: PropTypes.string.isRequired,
+  message: PropTypes.string,
+  iserror: PropTypes.bool,
+  disabled: PropTypes.bool,
+  rowType: PropTypes.bool,
+  labelClasses: PropTypes.string,
+  inputClasses: PropTypes.string,
 };

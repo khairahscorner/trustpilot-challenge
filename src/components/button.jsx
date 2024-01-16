@@ -38,13 +38,13 @@ const Button = ({
 };
 
 Button.propTypes = {
-  type: PropTypes.oneOf(['primary', 'secondary']),
+  type: PropTypes.string,
   text: PropTypes.string.isRequired,
   click: PropTypes.func,
   disabled: PropTypes.bool,
   id: PropTypes.string,
   extraClasses: PropTypes.string,
-  size: PropTypes.oneOf(['big', 'small']),
+  size: PropTypes.string,
 };
 
 export default Button;
