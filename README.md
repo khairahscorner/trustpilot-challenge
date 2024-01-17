@@ -1,8 +1,8 @@
 # Trustpilot Challenge
 
-Solution by Airat Yusuff
+Pony Challenge API Solution by Airat Yusuff.
 
-Demo available at: ***deployed URL***
+Live at: ***https://tp-challenge.netlify.app/***
 
 
 ## Table of contents
@@ -28,33 +28,45 @@ $ npm run dev
 ```
 
 ## Repo Structure
-**To edit
-
 ```
 /
 |
 ├─ public/             # for logos/images used via urls, without direct imports
 |
 ├─ src/
-│  ├─ assets/          # Fonts, images, SVGs for direct imports
+│  ├─ assets/          # Logos/images for direct imports
 │  │
-│  ├─ sample-folder/
-│  │  ├─ sample/       # Add assets and liabilities
-│  │  │  ├─  sample-sub/
-│  │  │  └─  sample-sub-end/
+│  ├─ components/
+│  │  ├─ actions/
+│  │  │  └─  gameActions.js      # API calls
 │  │  │
-│  │  └─ sample-end/         # 
+│  │  ├─ UI/                     # Components used to create the game UI             
+│  │  │  ├─  buttonNavigation.js
+│  │  │  ├─  gameDetails.js
+│  │  │  ├─  gameGuide.js
+│  │  │  ├─  gameHeader.js
+│  │  │  └─  maze.js
+│  │  │
+│  │  ├─ button.jsx              # Other reusable components
+│  │  ├─ modal.jsx
+│  │  ├─ select.jsx
+│  │  └─ textinput.jsx
 │  │
-│  ├─ sample-folder-2/               #
+│  ├─ config/
+│  │  ├─ axios.js
+│  │  └─ index.js               # extra data
 │  │
-│  │
-│  └─ sample-file-end
+│  ├─ App.jsx                   # Main Game component
+│  ├─ index.scss
+│  └─ main.jsx
 │
 ├─ ...
-├─ index.html               # This file
-├─ package.json             # This file
+├─ index.html
+├─ ...
+├─ package.json             
 ├─ README.md                # This file
-└─ vite.config.js           # Vite config file
+│
+└─ ...
 ```
 
 ---
@@ -65,15 +77,11 @@ $ npm run dev
 
 - <a href="https://vitejs.dev/" target="_blank">Vite</a>
 
-- <a href="https://react-typescript-cheatsheet.netlify.app/" target="_blank">React + Typescript cheatsheet</a>
-
 - <a href="https://tailwindcss.com/docs/installation/" target="_blank">TailwindCSS</a>
 
 ---
 
 ## Integrations
-
-- <a href="https://ponychallenge.trustpilot.com/api-docs/index.html" target="_blank">Trustpilot Pony Challenge API</a>
 
 - <a href="https://ponychallenge.trustpilot.com/index.html" target="_blank">Trustpilot Pony Challenge</a>
 
