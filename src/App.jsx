@@ -3,7 +3,11 @@ import Button from "./components/button";
 import { Controller, useForm } from "react-hook-form";
 import { Textinput } from "./components/textinput";
 import { Select } from "./components/select";
-import { difficultyOptions, ponyNames } from "./config/index";
+import {
+  difficultyOptions,
+  keycodeToDirection,
+  ponyNames,
+} from "./config/index";
 import Modal from "./components/modal";
 import ButtonNavigation from "./components/UI/buttonNavigation";
 import GameGuide from "./components/UI/gameGuide";
@@ -30,6 +34,7 @@ function App() {
 
   const [selectedPonyName, setSelectedPonyName] = useState(ponyNames[0]);
   const [difficulty, setDifficulty] = useState(0);
+  const [keyboardActive, setKeyboardActive] = useState(false);
 
   const {
     handleSubmit,
@@ -40,6 +45,7 @@ function App() {
     criteriaMode: "all",
     mode: "onSubmit",
   });
+
   // adjust maze cell size based on screen size
   useEffect(() => {
     const handleResize = () => {
@@ -58,6 +64,27 @@ function App() {
     };
   }, [mazeWidth]);
 
+  useEffect(() => {
+    const navigateWithKeyboard = (e) => {
+      let direction;
+
+      e.preventDefault();
+      if (e.keyCode >= 37 && e.keyCode <= 40) {
+        direction = keycodeToDirection(e.keyCode);
+        onPonyPlay(direction);
+      }
+    };
+    if (keyboardActive) {
+      document.addEventListener("keydown", navigateWithKeyboard);
+    } else {
+      document.removeEventListener("keydown", navigateWithKeyboard);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", navigateWithKeyboard);
+    };
+  }, [keyboardActive]);
+
   // actions
   const startNewGame = () => {
     setActiveGame(false);
@@ -67,6 +94,7 @@ function App() {
 
   const resetGameOptions = () => {
     setGameOptions(false);
+    setKeyboardActive(false);
     reset();
     setSelectedPonyName(ponyNames[0]);
     setDifficulty(0);
@@ -136,6 +164,17 @@ function App() {
               <div className="flex flex-col-reverse md:grid md:grid-cols-3 md:gap-5">
                 <div className="text-left col-span-3 md:col-span-1 mb-8">
                   <ButtonNavigation ponyAction={onPonyPlay} />
+                  <div className="hidden md:block">
+                    <h5 className="mb-3 font-semibold">Or </h5>
+                    <Button
+                      click={() => setKeyboardActive(true)}
+                      type="secprimaryondary"
+                      extraClasses="mb-4"
+                      size="small"
+                      text="Enable Keyboard Navigation"
+                      disabled={keyboardActive}
+                    />
+                  </div>
                   <GameDetails
                     selectedPonyName={selectedPonyName}
                     dimensions={gameData?.size}
@@ -146,7 +185,7 @@ function App() {
                   </div>
                 </div>
                 <div className="px-0 md:px-5 col-span-3 md:col-span-2 mx-auto">
-                  <div className="mb-4 block md:hidden">
+                  <div className="mb-4 md:hidden">
                     <GameGuide />
                   </div>
                   <Maze
@@ -155,6 +194,9 @@ function App() {
                     btnAction={startNewGame}
                   />
                 </div>
+                <p className="md:hidden text-center italic text-xs mb-6 font-medium">
+                  Use the button navigation below for controls
+                </p>
               </div>
             </div>
           </div>

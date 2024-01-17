@@ -36,14 +36,6 @@ const ButtonNavigation = ({ ponyAction }) => (
                 text="Down"
             />
         </div>
-        {/* <h5 className="mb-3 font-semibold">Or </h5>
-        <Button
-            click={handleSubmit(resetGameOptions)}
-            type="secprimaryondary"
-            extraClasses="mb-4"
-            size="small"
-            text="Enable Keyboard Navigation"
-        /> */}
     </div>
 );
 
