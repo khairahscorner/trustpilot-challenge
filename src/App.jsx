@@ -275,19 +275,21 @@ function App() {
                   >
                     {gameData?.data.map((cell, i) => (
                       <div
-                        className={`maze-cell w-[${cellSize}px] ${cell.join(
+                        className={`maze-cell w-[${cellSize}px] relative ${cell.join(
                           " "
-                        )} ${
-                          i === locationArr.endPoint
-                            ? "bg-success"
-                            : i === locationArr.pony
-                            ? " bg-pink-700"
-                            : i === locationArr.domokun
-                            ? " bg-domokun"
-                            : ""
-                        }`}
+                        )}`}
                         key={`maze-cell-${i}`}
-                      ></div>
+                      >
+                        {i === locationArr.pony ? (
+                          <div className="dot bg-pink-700 absolute"></div>
+                        ) : i === locationArr.domokun ? (
+                          <div className="dot bg-domokun absolute"></div>
+                        ) : (
+                          i === locationArr.endPoint && (
+                            <div className="dot bg-success absolute"></div>
+                          )
+                        )}
+                      </div>
                     ))}
                   </div>
                   <div className="mx-auto mt-5">

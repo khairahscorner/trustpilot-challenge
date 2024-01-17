@@ -15,7 +15,8 @@ const customStyles = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    maxWidth: "50%",
+    maxWidth: "500px",
+    width: "100%",
     height: "fit-content",
   },
 };
@@ -30,7 +31,7 @@ const AlertModal = ({ isOpen, action, message }) => {
       style={customStyles}
       appElement={document.getElementById("root")}
     >
-      <h2 className="text-3xl text-center font-bold mb-3">{message}</h2>
+      <h2 className="text-2xl md:text-3xl text-center font-bold mb-3">{message}</h2>
       <div className="border-b border-neutral-200 my-8"></div>
       <div className="text-center">
         <Button
