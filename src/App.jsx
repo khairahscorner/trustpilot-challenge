@@ -179,6 +179,7 @@ function App() {
                     selectedPonyName={selectedPonyName}
                     dimensions={gameData?.size}
                     difficulty={difficulty}
+                    ponyPosition={gameData?.pony[0]}
                   />
                   <div className="mb-4 hidden md:block">
                     <GameGuide />
@@ -278,6 +279,7 @@ function App() {
                     </div>
                     <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                       <Select
+                        id="difficulty"
                         label="Choose Difficulty (Optional):"
                         selected={difficulty}
                         options={difficultyOptions}
@@ -286,6 +288,7 @@ function App() {
                         }
                       />
                       <Select
+                        id="pony-name"
                         label="Choose Pony:"
                         selected={selectedPonyName}
                         options={ponyNames}

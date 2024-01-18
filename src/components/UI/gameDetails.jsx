@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const GameDetails = ({ selectedPonyName, dimensions, difficulty }) => (
+const GameDetails = ({ selectedPonyName, dimensions, difficulty, ponyPosition }) => (
     <div className="mb-4">
         <h4 className="mb-3 font-bold text-lg">Game Details</h4>
         <div className="flex items-center mb-2">
@@ -19,6 +19,12 @@ const GameDetails = ({ selectedPonyName, dimensions, difficulty }) => (
             <p>
                 <span className=" font-semibold">Difficulty: </span>
                 {difficulty}
+            </p>
+        </div>
+        <div className="flex items-center mb-2">
+            <p>
+                <span className="font-medium">Pony Position: </span>
+                {ponyPosition}
             </p>
         </div>
     </div>
