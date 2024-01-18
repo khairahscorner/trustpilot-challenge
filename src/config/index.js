@@ -15,22 +15,19 @@ export const keycodeToDirection = (keycode) => {
     let direction = null;
     switch (keycode) {
 
-        // left arrow
+        // left
         case 37:
             direction = "west";
             break;
-
-        // up arrow
-        case 38:
-            direction = "north";
-            break;
-
-        // right arrow
+        // right
         case 39:
             direction = "east";
             break;
-
-        // down arrow
+        // up
+        case 38:
+            direction = "north";
+            break;
+        // down
         case 40:
             direction = "south";
             break;

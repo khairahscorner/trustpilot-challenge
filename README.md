@@ -57,10 +57,12 @@ $ npm run dev
 │  │  └─ index.js               # extra data
 │  │
 │  ├─ App.jsx                   # Main Game component
+│  ├─ App.test.js               # Tests file
 │  ├─ index.scss
 │  └─ main.jsx
 │
 ├─ ...
+├─ fileMock.js                  # Mock logo file import
 ├─ index.html
 ├─ ...
 ├─ package.json             

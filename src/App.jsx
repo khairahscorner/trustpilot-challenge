@@ -85,7 +85,8 @@ function App() {
     };
   }, [keyboardActive]);
 
-  // actions
+  //All actions
+
   const startNewGame = () => {
     setActiveGame(false);
     setIsGameOver(false);
@@ -147,7 +148,7 @@ function App() {
     if (response.state === "active") {
       drawMaze(gameData?.maze_id);
     }
-    // pony won/lost
+    // if pony won/lost
     else {
       setGameOverResponse(response["state-result"]);
       setIsGameOver(true);

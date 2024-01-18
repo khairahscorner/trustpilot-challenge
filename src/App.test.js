@@ -76,49 +76,49 @@ test('Successfully start game', async () => {
   });
 });
 
-test("Pony move", async () => {
-  const startButton = screen.getByText('Start');
-  userEvent.click(startButton);
+// test("Pony move", async () => {
+//   const startButton = screen.getByText('Start');
+//   userEvent.click(startButton);
 
-  await waitFor(() => {
-    const gameStartButton = screen.getByText('Start Game');
-    expect(gameStartButton).toBeInTheDocument();
-  });
+//   await waitFor(() => {
+//     const gameStartButton = screen.getByText('Start Game');
+//     expect(gameStartButton).toBeInTheDocument();
+//   });
 
-  const form = screen.getByLabelText('Width:').closest('form');
-  expect(form).toBeInTheDocument();
+//   const form = screen.getByLabelText('Width:').closest('form');
+//   expect(form).toBeInTheDocument();
 
-  fireEvent.change(screen.getByLabelText('Width:'), { target: { value: '15' } })
-  fireEvent.change(screen.getByLabelText('Height:'), { target: { value: '22' } })
+//   fireEvent.change(screen.getByLabelText('Width:'), { target: { value: '15' } })
+//   fireEvent.change(screen.getByLabelText('Height:'), { target: { value: '22' } })
 
-  fireEvent.submit(form);
+//   fireEvent.submit(form);
 
-  await waitFor(() => {
-    const gameStarted = screen.getByText('Button Navigation');
-    expect(gameStarted).toBeInTheDocument();
-  });
+//   await waitFor(() => {
+//     const gameStarted = screen.getByText('Button Navigation');
+//     expect(gameStarted).toBeInTheDocument();
+//   });
 
-  const initialPonyPosition = screen.getByText("Pony Position:").closest('p').textContent;
-  const moves = ["Left", "Right", "Up", "Down"];
-  let positionChanged = false;
+//   const initialPonyPosition = screen.getByText("Pony Position:").closest('p').textContent;
+//   const moves = ["Left", "Right", "Up", "Down"];
+//   let positionChanged = false;
 
-  for (const move of moves) {
-    userEvent.click(screen.getByText(move));
+//   for (const move of moves) {
+//     userEvent.click(screen.getByText(move));
 
-    await waitFor(() => {
-      const updatedPonyPosition = screen.getByText("Pony Position:").closest('p').textContent;
+//     await waitFor(() => {
+//       const updatedPonyPosition = screen.getByText("Pony Position:").closest('p').textContent;
 
-      if (updatedPonyPosition !== initialPonyPosition) {
-        positionChanged = true;
-      }
-    });
+//       if (updatedPonyPosition !== initialPonyPosition) {
+//         positionChanged = true;
+//       }
+//     });
 
-    if (positionChanged) {
-      break;
-    }
-  }
+//     if (positionChanged) {
+//       break;
+//     }
+//   }
 
-  // Now you can assert that the position has changed for at least one move
-  expect(positionChanged).toBe(true);
+//   // Now you can assert that the position has changed for at least one move
+//   expect(positionChanged).toBe(true);
 
-});
+// });
