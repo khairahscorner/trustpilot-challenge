@@ -24,7 +24,7 @@ function App() {
   const [gameOptions, setGameOptions] = useState(false);
   const [error, setError] = useState(null);
 
-  const [cellSize, setCellSize] = useState(0);
+  const [cellSize, setCellSize] = useState(20);
   const [mazeWidth, setMazeWidth] = useState(0);
 
   const [activeGame, setActiveGame] = useState(false);
