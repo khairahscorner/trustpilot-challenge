@@ -1,0 +1,58 @@
+// 1) reduce API calls
+  const onPonyPlay = (direction) => {
+    if (!activeGame) return null;
+
+    if (isMoveValid(gameData, direction)) {
+      setMoveError(null);
+
+      makeNextMove(gameData?.maze_id, direction)
+        .then((res) => {
+          handleResponse(res.data);
+        })
+        .catch((err) => {
+          setError(err?.response?.data);
+        });
+    } else {
+      setMoveError("Invalid move. Please choose a different direction.");
+    }
+  };
+
+- update app.js: 
+    const [moveError, setMoveError] = useState(null);
+    <GameHeader errorMessage={moveError} />
+
+- gameheader too:
+const GameHeader = ({errorMessage}) => (
+    <>
+        ...
+        <p className="mb-3 text-base italic font-semibold text-red-500">
+        {errorMessage}
+        </p>
+    </>
+)
+
+
+
+2) //memoise handleResize
+
+- set default cellsize in usestate
+  const handleResize = useCallback(() => {
+    const updateCellSize = () => {
+      if (window.innerWidth < 992) {
+        setCellSize(15);
+      } else {
+        setCellSize(20);
+      }
+      // console.log("renddi")
+    };
+
+    updateCellSize();
+  }, [setCellSize]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
