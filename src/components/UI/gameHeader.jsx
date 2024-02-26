@@ -1,6 +1,6 @@
 import Logo from "../../assets/logo.jpeg";
 
-const GameHeader = () => (
+const GameHeader = ({errorMessage}) => (
     <>
         <div className="h-12 md:h-24 flex justify-center items-center mb-6">
             <img src={Logo} className="w-24 md:w-auto" alt="Pony Logo" />
@@ -12,6 +12,11 @@ const GameHeader = () => (
             Help the pony escape the Domokun!
         </p>
         <div className="border-b border-neutral-200 my-8"></div>
+        {errorMessage && (
+            <p className="mb-3 text-base italic font-semibold text-red-500">
+                {errorMessage}
+            </p>
+        )}
     </>
 )
 

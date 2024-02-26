@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Button from "./components/button";
 import { Controller, useForm } from "react-hook-form";
 import { Textinput } from "./components/textinput";
 import { Select } from "./components/select";
 import {
   difficultyOptions,
+  isMoveValid,
   keycodeToDirection,
   ponyNames,
 } from "./config/index";
@@ -23,6 +24,7 @@ import {
 function App() {
   const [gameOptions, setGameOptions] = useState(false);
   const [error, setError] = useState(null);
+  const [moveError, setMoveError] = useState(null);
 
   const [cellSize, setCellSize] = useState(20);
   const [mazeWidth, setMazeWidth] = useState(0);
@@ -47,8 +49,8 @@ function App() {
   });
 
   // adjust maze cell size based on screen size
-  useEffect(() => {
-    const handleResize = () => {
+  const handleResize = useCallback(() => {
+    const updateCellSize = () => {
       if (window.innerWidth < 992) {
         setCellSize(15);
       } else {
@@ -56,13 +58,16 @@ function App() {
       }
     };
 
+    updateCellSize();
+  }, [setCellSize]);
+
+  useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [mazeWidth]);
+  }, [handleResize]);
 
   useEffect(() => {
     const navigateWithKeyboard = (e) => {
@@ -135,13 +140,19 @@ function App() {
   const onPonyPlay = (direction) => {
     if (!activeGame) return null;
 
-    makeNextMove(gameData?.maze_id, direction)
-      .then((res) => {
-        handleResponse(res.data);
-      })
-      .catch((err) => {
-        setError(err?.response?.data);
-      });
+    if (isMoveValid(gameData, direction)) {
+      setMoveError(null);
+
+      makeNextMove(gameData?.maze_id, direction)
+        .then((res) => {
+          handleResponse(res.data);
+        })
+        .catch((err) => {
+          setError(err?.response?.data);
+        });
+    } else {
+      setMoveError("Invalid move. Please choose a different direction.");
+    }
   };
 
   const handleResponse = (response) => {
@@ -161,7 +172,7 @@ function App() {
         {gameData && activeGame ? (
           <div className="py-8 md:my-24 md:py-0 flex justify-center items-center">
             <div className="bg-white w-full md:w-max border rounded p-6 text-center">
-              <GameHeader />
+              <GameHeader errorMessage={moveError} />
               <div className="flex flex-col-reverse md:grid md:grid-cols-3 md:gap-5">
                 <div className="text-left col-span-3 md:col-span-1 mb-8">
                   <ButtonNavigation ponyAction={onPonyPlay} />
