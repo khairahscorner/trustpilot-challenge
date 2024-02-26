@@ -38,14 +38,15 @@ export const keycodeToDirection = (keycode) => {
 }
 
 export const isMoveValid = (mazeData, direction) => {
-    // Get the wall data of the current cell and position of the cell intended to move to
-    let currentPonyPosition = mazeData?.pony[0];
+  let currentPonyPosition = mazeData?.pony[0];
 
+  // Get the wall data of the current cell and position of the cell intended to move to
     const currentCellData = mazeData.data[currentPonyPosition];
     const intendedPosition = getAdjacentCellIndex(currentPonyPosition, direction, mazeData?.size[0]);
 
     // Check if there is wall in the intended direction
     return (
+      intendedPosition <= (mazeData?.size[0]* mazeData?.size[1])  &&
       !hasWall(currentCellData, direction) &&
       !hasWall(mazeData.data[intendedPosition], oppositeDirection(direction))
     );

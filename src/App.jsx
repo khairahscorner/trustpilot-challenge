@@ -37,6 +37,7 @@ function App() {
   const [selectedPonyName, setSelectedPonyName] = useState(ponyNames[0]);
   const [difficulty, setDifficulty] = useState(0);
   const [keyboardActive, setKeyboardActive] = useState(false);
+  const [keyboardDirection, setKeyboardDirection] = useState(null);
 
   const {
     handleSubmit,
@@ -76,7 +77,7 @@ function App() {
       e.preventDefault();
       if (e.keyCode >= 37 && e.keyCode <= 40) {
         direction = keycodeToDirection(e.keyCode);
-        onPonyPlay(direction);
+        setKeyboardDirection(direction);
       }
     };
     if (keyboardActive) {
@@ -89,6 +90,13 @@ function App() {
       document.removeEventListener("keydown", navigateWithKeyboard);
     };
   }, [keyboardActive]);
+
+  useEffect(() => {
+    if (keyboardDirection && gameData) {
+      onPonyPlay(keyboardDirection);
+      setKeyboardDirection(null);
+    }
+  }, [keyboardDirection, gameData]);
 
   //All actions
 
