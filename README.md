@@ -91,5 +91,8 @@ Others - can be found in package.json
 
 ---
 
-## Miscellaneous
+## Useful Helper Resources
 
+- <a href="https://github.com/lkozyr/pony-challenge" target="_blank">Pony Challenge by Liubov Kozyr</a>
+
+---
